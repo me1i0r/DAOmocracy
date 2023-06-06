@@ -24,7 +24,7 @@ p {
 }
 
 .btn {
-  @apply shadow-md;
+  @apply shadow-md rounded-none border;
 }
 
 .btn.btn-ghost {

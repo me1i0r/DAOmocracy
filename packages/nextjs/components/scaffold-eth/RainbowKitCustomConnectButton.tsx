@@ -1,16 +1,14 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useDisconnect, useSwitchNetwork } from "wagmi";
 import { ArrowLeftOnRectangleIcon, ArrowsRightLeftIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
-import { Balance, BlockieAvatar } from "~~/components/scaffold-eth";
-import { useAutoConnect, useNetworkColor } from "~~/hooks/scaffold-eth";
+import { BlockieAvatar } from "~~/components/scaffold-eth";
+import { useNetworkColor } from "~~/hooks/scaffold-eth";
 import { getTargetNetwork } from "~~/utils/scaffold-eth";
 
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
  */
 export const RainbowKitCustomConnectButton = () => {
-  useAutoConnect();
-
   const networkColor = useNetworkColor();
   const configuredNetwork = getTargetNetwork();
   const { disconnect } = useDisconnect();
@@ -26,8 +24,18 @@ export const RainbowKitCustomConnectButton = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button className="btn btn-primary btn-sm" onClick={openConnectModal} type="button">
-                    Connect Wallet
+                  <button
+                    className="btn btn-primary bg-transparent btn-lg border-primary text-primary hover:bg-primary hover:text-white"
+                    onClick={openConnectModal}
+                    type="button"
+                    style={{
+                      borderWidth: "3px",
+                      textTransform: "none",
+                      boxShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)",
+                      borderColor: "primary",
+                    }}
+                  >
+                    connect to the collective
                   </button>
                 );
               }
@@ -65,16 +73,18 @@ export const RainbowKitCustomConnectButton = () => {
               return (
                 <div className="px-2 flex justify-end items-center">
                   <div className="flex justify-center items-center border-1 rounded-lg">
-                    <div className="flex flex-col items-center mr-1">
-                      <Balance address={account.address} className="min-h-0 h-auto" />
-                      <span className="text-xs" style={{ color: networkColor }}>
-                        {chain.name}
-                      </span>
-                    </div>
+                    <div className="flex flex-col items-center mr-1"></div>
                     <button
                       onClick={openAccountModal}
                       type="button"
-                      className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md"
+                      style={{
+                        width: "200px",
+                        borderWidth: "3px",
+                        textTransform: "none",
+                        boxShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)",
+                        borderColor: "primary",
+                      }}
+                      className="btn bg-transparent btn-lg pl-0 pr-2 shadow-md border border-primary text-primary hover:bg-primary hover:text-white"
                     >
                       <BlockieAvatar address={account.address} size={24} ensImage={account.ensAvatar} />
                       <span className="ml-2 mr-1">{account.displayName}</span>
