@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Head from "next/head";
 import type { NextPage } from "next";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 
@@ -15,7 +16,7 @@ const Propose: NextPage = () => {
 
   return (
     <div>
-      <head>
+      <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
@@ -48,7 +49,7 @@ const Propose: NextPage = () => {
           }
         `}</style>
         <title>Propose</title>
-      </head>
+      </Head>
       <div
         style={{
           background: "white",
@@ -61,10 +62,15 @@ const Propose: NextPage = () => {
         <div style={{ position: "absolute", top: "10px", right: "100px" }}>
           <RainbowKitCustomConnectButton />
         </div>
+
+        <span className="block text-9xl pl-10 absolute top-0 left-10 my-soul-font" style={{ color: "#8d56a9" }}>
+          propose
+        </span>
+
         <form style={{ width: "50%" }}>
           <div className="mb-3">
             <label htmlFor="exampleInputTitle" className="form-label">
-              Title
+              title
             </label>
             <input
               type="text"
@@ -81,50 +87,87 @@ const Propose: NextPage = () => {
               </label>
               <select className="form-control" id="exampleInputDAO" onFocus={handleInputFocus} onBlur={handleInputBlur}>
                 <option value="">Select DAO</option>
-                <option value="dao1">DAO 1</option>
-                <option value="dao2">DAO 2</option>
-                <option value="dao3">DAO 3</option>
+                <option value="dao1">demoDAO</option>
+                <option value="dao2">anotherDAO</option>
               </select>
             </div>
             <div style={{ flex: 1, marginLeft: "10px" }}>
               <label htmlFor="exampleInputAmount" className="form-label">
-                Amount
+                amount
               </label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleInputAmount"
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-              />
+              <div className="dollar-input">
+                <span className="dollar-sign">$</span>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputAmount"
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputBlur}
+                />
+              </div>
             </div>
           </div>
           <div className="mb-3">
             <label htmlFor="exampleInputProposal" className="form-label">
-              Proposal
+              proposal
             </label>
             <textarea
               className="form-control"
               id="exampleInputProposal"
-              rows={10}
+              rows={15}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
             ></textarea>
           </div>
-          <button
-            className="btn btn-primary btn-lg"
-            type="button"
-            style={{
-              borderWidth: "3px",
-              textTransform: "none",
-              boxShadow: "2px 2px 0px rgba(0, 0, 0, 0.1)",
-              borderColor: "#6B7280",
-            }}
-          >
-            Submit
-          </button>
+          <div style={{ display: "flex", justifyContent: "center", paddingTop: "25px" }}>
+            <button
+              className="btn btn-primary bg-transparent btn-lg text-primary hover:bg-primary hover:text-white"
+              type="button"
+              style={{
+                borderWidth: "3px",
+                textTransform: "none",
+                boxShadow: "3px 3px 0px rgba(0, 0, 0, 0.1)",
+                borderColor: "#6B7280",
+                borderRadius: "0",
+              }}
+            >
+              submit
+            </button>
+          </div>
         </form>
       </div>
+      <style jsx>{`
+        .centered-text {
+          display: flex;
+          justify-content: center;
+          height: 100vh;
+          position: absolute;
+          top: 0;
+        }
+
+        .text-primary {
+          color: #6b7280;
+          font-size: 24px;
+          font-weight: bold;
+          text-align: center;
+        }
+        .dollar-input {
+          position: relative;
+        }
+
+        .dollar-sign {
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #6b7280;
+          font-weight: bold;
+        }
+
+        .form-control {
+          padding-left: 20px; /* Add some padding to accommodate the $ symbol */
+        }
+      `}</style>
     </div>
   );
 };
